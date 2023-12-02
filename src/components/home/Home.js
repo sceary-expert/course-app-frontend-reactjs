@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import CourseCard from "./CourseCard";
+
 import axios from "axios";
 import AllCourseCard from "./AllCourseCard";
 
@@ -11,29 +11,30 @@ export default function Home() {
     const [filteredCourses, setFilteredCourses] = useState([]);
     const [searchValue, setSearchValue] = useState('');
 
-    function searchCourses(query) {
-        // Convert the query to lowercase for case-insensitive search
-        const lowerCaseQuery = query.toLowerCase();
-      
-        // Filter courses based on the query
-        const searchResults = courses.filter(course => {
-          const lowerCaseName = course.name.toLowerCase();
-          const lowerCaseInstructor = course.instructor.toLowerCase();
-      
-          // Check if either course name or instructor contains the query
-          return (
-            lowerCaseName.includes(lowerCaseQuery) ||
-            lowerCaseInstructor.includes(lowerCaseQuery)
-          );
-        });
-      
-        return searchResults;
-    }
-
     useEffect(() =>{
-       setFilteredCourses(searchCourses(searchValue));
-       console.log("filtered courses ", filteredCourses);
-    }, [searchValue, setFilteredCourses])
+        function searchCourses(query) {
+            // Convert the query to lowercase for case-insensitive search
+            const lowerCaseQuery = query.toLowerCase();
+          
+            // Filter courses based on the query
+            const searchResults = courses.filter(course => {
+              const lowerCaseName = course.name.toLowerCase();
+              const lowerCaseInstructor = course.instructor.toLowerCase();
+          
+              // Check if either course name or instructor contains the query
+              return (
+                lowerCaseName.includes(lowerCaseQuery) ||
+                lowerCaseInstructor.includes(lowerCaseQuery)
+              );
+            });
+          
+            return searchResults;
+        }
+        setFilteredCourses(searchCourses(searchValue));
+     }, [searchValue, courses])
+     
+    
+
 
 
     useEffect(() =>{
