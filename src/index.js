@@ -8,6 +8,7 @@ import Layout from './Layout';
 import Home from './components/home/Home';
 import About from './components/about/About';
 import Contact from './components/contacts/Contact';
+import CourseDetail from './components/home/CourseDetail';
 
 // const router = createBrowserRouter([
 //   {
@@ -36,6 +37,7 @@ const router = createBrowserRouter(
       <Route path = '' element= {<Home/>} />
       <Route path = 'about' element= {<About/>} />
       <Route path = 'contact' element= {<Contact/>} />
+      <Route path = 'course/:courseId' element= {<CourseDetail/>} />
     </Route>
   )
 )
