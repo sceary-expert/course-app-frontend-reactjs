@@ -13,13 +13,13 @@ export default function CourseCard({course})
 
 
             <div className="block aspect-w-16 aspect-h-9 w-full max-w-sm bg-white border border-violet-200 rounded-lg shadow dark:bg-violet-800 dark:border-violet-700">
-                <a href="#hhj">
-                    <img className="p-8 rounded-t-lg w-full h-full " src={course.thumbnail} alt="product for view" />
-                </a>
+                
+                    <img className="p-8 rounded-t-lg w-full h-full" src={course.thumbnail} alt="product for view" />
+                
                 <div className="px-5 pb-5">
-                    <a href="#uhiu">
+                    
                         <h5 className="text-xl font-semibold tracking-tight text-violet-900 dark:text-white">{course.name}</h5>
-                    </a>
+                    
                     <div className="flex items-center mt-2.5 mb-5">
                         {/* <div className="flex items-center space-x-1 rtl:space-x-reverse">
                             <svg className="w-4 h-4 text-yellow-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">

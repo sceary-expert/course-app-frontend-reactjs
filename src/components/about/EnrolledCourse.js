@@ -1,72 +1,7 @@
-import axios from "axios";
-import { useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
-
-
-const CourseDetail = () =>{
-    const courseId = useParams()
-    const [course, setCourse] = useState({id:"-1"});
-    const [isEnrolled, setIsEnrolled] = useState(false);
-    
-    function EnrollHandler()
-    {   
-        if (!isEnrolled) {
-            let enrolledCourses = JSON.parse(localStorage.getItem('courses')) || [];
-            const newCourse = course;
-            enrolledCourses = [...enrolledCourses, newCourse];
-            localStorage.setItem('courses', JSON.stringify(enrolledCourses));
-            setIsEnrolled(true);
-        } else {
-            // Handle case where the course is already enrolled
-            console.log("Course is already enrolled.");
-        }
-        // enrolledCourses = [...enrolledCourses, newCourse];
-        // localStorage.setItem('courses', JSON.stringify(enrolledCourses));
-        // setIsEnrolled(true);
-    }
-    useEffect(() =>{
-        const enrolledCourses = JSON.parse(localStorage.getItem('courses')) || [];
-        const newCourse = course;
-        const isAlreadyEnrolled = enrolledCourses.some((enrolledCourse) => enrolledCourse.id.toString() === newCourse.id.toString());
-        
-        
-        
-        if(isAlreadyEnrolled)
-        {
-            setIsEnrolled(true);
-        }
-        
-        
-
-        //Display score cards
-        axios.get('https://course-app-node.onrender.com/api/courses')
-        .then(response => {
-          console.log("response data ",response.data);
-          console.log("id ", courseId.courseId)
-        //   const result = response.data.filter((e) => e.id === courseId.courseId)
-        const allCourses = response.data;
-        let result;
-        for(let i = 0; i < allCourses.length; i++)
-        {
-            if(allCourses[i].id.toString() === courseId.courseId.toString())result = allCourses[i];
-        }
-        console.log("result", result)
-        setCourse(result)
-        //   if (result.length > 0) {
-        //     setCourse(result[0]);
-        //   } else {
-        //     console.error("Course not found");
-        //   }
-          // Additional logic can be added here based on the response
-          return;
-        })
-        .catch(error => {
-          console.error('Error fetching data:', error);
-        });
-    },[courseId, setCourse])
-    console.log(course)
-    
+const EnrolledCourse = ({course}) =>
+{
     return(
+        
         <div>
             {course?(
 
@@ -140,8 +75,9 @@ const CourseDetail = () =>{
                                 <span className="title-font font-medium text-2xl text-gray-900">{course.duration}</span>
                                 <button 
                                 className="flex ml-auto text-white bg-violet-500 border-0 py-2 px-6 focus:outline-none hover:bg-violet-600 rounded"
-                                onClick={EnrollHandler}
-                                >{isEnrolled ? "Already Enrolled" : "Enroll Now"}</button>
+                                >
+                                    Enrolled
+                                </button>
                                 <button className="rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-4">
                                     <svg fill="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-5 h-5" viewBox="0 0 24 24">
                                     <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"></path>
@@ -163,4 +99,4 @@ const CourseDetail = () =>{
         
     )
 }
-export default CourseDetail
+export default EnrolledCourse
