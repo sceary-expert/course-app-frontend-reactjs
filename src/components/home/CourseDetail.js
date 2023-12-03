@@ -7,24 +7,10 @@ const CourseDetail = () =>{
     const courseId = useParams()
     const [course, setCourse] = useState({id:"-1"});
     const [isEnrolled, setIsEnrolled] = useState(false);
+    const [buttonText, setButtonText] = useState("Enroll Now");
     
     function EnrollHandler()
     {   
-        if (!isEnrolled) {
-            let enrolledCourses = JSON.parse(localStorage.getItem('courses')) || [];
-            const newCourse = course;
-            enrolledCourses = [...enrolledCourses, newCourse];
-            localStorage.setItem('courses', JSON.stringify(enrolledCourses));
-            setIsEnrolled(true);
-        } else {
-            // Handle case where the course is already enrolled
-            console.log("Course is already enrolled.");
-        }
-        // enrolledCourses = [...enrolledCourses, newCourse];
-        // localStorage.setItem('courses', JSON.stringify(enrolledCourses));
-        // setIsEnrolled(true);
-    }
-    useEffect(() =>{
         const enrolledCourses = JSON.parse(localStorage.getItem('courses')) || [];
         const newCourse = course;
         const isAlreadyEnrolled = enrolledCourses.some((enrolledCourse) => enrolledCourse.id.toString() === newCourse.id.toString());
@@ -34,7 +20,26 @@ const CourseDetail = () =>{
         if(isAlreadyEnrolled)
         {
             setIsEnrolled(true);
+            setButtonText("Already Enrolled")
         }
+        if (!isEnrolled) {
+            let enrolledCourses = JSON.parse(localStorage.getItem('courses')) || [];
+            const newCourse = course;
+            enrolledCourses = [...enrolledCourses, newCourse];
+            localStorage.setItem('courses', JSON.stringify(enrolledCourses));
+            setIsEnrolled(true);
+            setButtonText("Already Enrolled")
+        } else {
+            // Handle case where the course is already enrolled
+            console.log("Course is already enrolled.");
+        }
+        // enrolledCourses = [...enrolledCourses, newCourse];
+        // localStorage.setItem('courses', JSON.stringify(enrolledCourses));
+        // setIsEnrolled(true);
+    }
+    useEffect(() =>{
+        
+        
         
         
 
@@ -52,6 +57,21 @@ const CourseDetail = () =>{
         }
         console.log("result", result)
         setCourse(result)
+        const enrolledCourses = JSON.parse(localStorage.getItem('courses')) || [];
+        const newCourse = course;
+        console.log("new course id " ,result.id.toString());
+        const isAlreadyEnrolled = enrolledCourses.some((enrolledCourse) => {
+            console.log("enrolledCourse.id.toString() ", enrolledCourse.id.toString());
+            return enrolledCourse.id.toString() === result.id.toString()
+        });
+        
+        console.log("already " ,isAlreadyEnrolled)
+        
+        if(isAlreadyEnrolled)
+        {
+            setIsEnrolled(true);
+            setButtonText("Already Enrolled")
+        }
         //   if (result.length > 0) {
         //     setCourse(result[0]);
         //   } else {
@@ -63,7 +83,7 @@ const CourseDetail = () =>{
         .catch(error => {
           console.error('Error fetching data:', error);
         });
-    },[courseId, setCourse])
+    },[])
     console.log(course)
     
     return(
@@ -141,7 +161,7 @@ const CourseDetail = () =>{
                                 <button 
                                 className="flex ml-auto text-white bg-violet-500 border-0 py-2 px-6 focus:outline-none hover:bg-violet-600 rounded"
                                 onClick={EnrollHandler}
-                                >{isEnrolled ? "Already Enrolled" : "Enroll Now"}</button>
+                                >{buttonText}</button>
                                 <button className="rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-4">
                                     <svg fill="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-5 h-5" viewBox="0 0 24 24">
                                     <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"></path>
