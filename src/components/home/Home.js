@@ -2,12 +2,14 @@ import { useEffect, useState } from "react";
 
 import axios from "axios";
 import AllCourseCard from "./AllCourseCard";
+import { useApi } from "../../context/ApiContext";
 
 
 
 export default function Home() {
 
-    const [courses, setCourses] = useState([]);
+    // const [courses, setCourses] = useState([]);
+    const { courses } = useApi();
     const [filteredCourses, setFilteredCourses] = useState([]);
     const [searchValue, setSearchValue] = useState('');
 
@@ -37,20 +39,20 @@ export default function Home() {
 
 
 
-    useEffect(() =>{
-        //Display score cards
-        axios.get('https://course-app-node.onrender.com/api/courses')
-        .then(response => {
-          console.log(response.data);
-          setCourses(response.data);
-          setFilteredCourses(response.data);
+    // useEffect(() =>{
+    //     //Display score cards
+    //     axios.get('https://course-app-node.onrender.com/api/courses')
+    //     .then(response => {
+    //       console.log(response.data);
+    //       setCourses(response.data);
+    //       setFilteredCourses(response.data);
 
-          // Additional logic can be added here based on the response
-        })
-        .catch(error => {
-          console.error('Error fetching data:', error);
-        });
-    },[])
+    //       // Additional logic can be added here based on the response
+    //     })
+    //     .catch(error => {
+    //       console.error('Error fetching data:', error);
+    //     });
+    // },[])
     return (
         <div className="mx-auto w-full max-w-7xl m-2 rounded-md">
             <div className="bg-violet-700 h-50 p-8 rounded-lg mb-4 md:mb-8">

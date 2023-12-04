@@ -1,11 +1,21 @@
 import axios from "axios";
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
+import { useApi } from "../../context/ApiContext";
 
 
 const CourseDetail = () =>{
     const courseId = useParams()
-    const [course, setCourse] = useState({id:"-1"});
+    console.log("course id ", courseId.courseId)
+    const {courses, loading} = useApi();
+    console.log("loading ", loading);
+    // const [course, setCourse] = useState({id:"-1"});
+    const courseArr = courses?.filter((p) => p.id == courseId.courseId) || [];
+    let course = [];
+    console.log("course array ", courseArr);
+    console.log("courses ", courses);
+    if(courseArr.length > 0)course = courseArr[0];
+
     const [isEnrolled, setIsEnrolled] = useState(false);
     const [buttonText, setButtonText] = useState("Enroll Now");
     
@@ -37,53 +47,53 @@ const CourseDetail = () =>{
         // localStorage.setItem('courses', JSON.stringify(enrolledCourses));
         // setIsEnrolled(true);
     }
-    useEffect(() =>{
-        
+    // useEffect(() =>{     
         
         
         
 
-        //Display score cards
-        axios.get('https://course-app-node.onrender.com/api/courses')
-        .then(response => {
-          console.log("response data ",response.data);
-          console.log("id ", courseId.courseId)
-        //   const result = response.data.filter((e) => e.id === courseId.courseId)
-        const allCourses = response.data;
-        let result;
-        for(let i = 0; i < allCourses.length; i++)
-        {
-            if(allCourses[i].id.toString() === courseId.courseId.toString())result = allCourses[i];
-        }
-        console.log("result", result)
-        setCourse(result)
-        const enrolledCourses = JSON.parse(localStorage.getItem('courses')) || [];
-        const newCourse = course;
-        console.log("new course id " ,result.id.toString());
-        const isAlreadyEnrolled = enrolledCourses.some((enrolledCourse) => {
-            console.log("enrolledCourse.id.toString() ", enrolledCourse.id.toString());
-            return enrolledCourse.id.toString() === result.id.toString()
-        });
+    //     //Display score cards
+    //     // axios.get('https://course-app-node.onrender.com/api/courses')
+    //     // .then(response => {
+    //     //   console.log("response data ",response.data);
+    //     //   console.log("id ", courseId.courseId)
+    //     // //   const result = response.data.filter((e) => e.id === courseId.courseId)
+    //     // const allCourses = response.data;
+    //     // let result;
+    //     // for(let i = 0; i < allCourses.length; i++)
+    //     // {
+    //     //     if(allCourses[i].id.toString() === courseId.courseId.toString())result = allCourses[i];
+    //     // }
+    //     // console.log("result", result)
+    //     // setCourse(result)
+    //     const enrolledCourses = JSON.parse(localStorage.getItem('courses')) || [];
+    //     const newCourse = course;
+    //     console.log("new course id " ,result.id.toString());
+    //     const isAlreadyEnrolled = enrolledCourses.some((enrolledCourse) => {
+    //         console.log("enrolledCourse.id.toString() ", enrolledCourse.id.toString());
+    //         return enrolledCourse.id.toString() === result.id.toString()
+    //     })
+    //     // ;
         
-        console.log("already " ,isAlreadyEnrolled)
+    //     console.log("already " ,isAlreadyEnrolled)
         
-        if(isAlreadyEnrolled)
-        {
-            setIsEnrolled(true);
-            setButtonText("Already Enrolled")
-        }
-        //   if (result.length > 0) {
-        //     setCourse(result[0]);
-        //   } else {
-        //     console.error("Course not found");
-        //   }
-          // Additional logic can be added here based on the response
-          return;
-        })
-        .catch(error => {
-          console.error('Error fetching data:', error);
-        });
-    },[])
+    //     if(isAlreadyEnrolled)
+    //     {
+    //         setIsEnrolled(true);
+    //         setButtonText("Already Enrolled")
+    //     }
+    //     //   if (result.length > 0) {
+    //     //     setCourse(result[0]);
+    //     //   } else {
+    //     //     console.error("Course not found");
+    //     //   }
+    //       // Additional logic can be added here based on the response
+    //       return;
+    //     // })
+    //     // .catch(error => {
+    //     //   console.error('Error fetching data:', error);
+    //     // });
+    // },[])
     console.log(course)
     
     return(

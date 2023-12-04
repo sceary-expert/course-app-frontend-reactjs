@@ -9,6 +9,7 @@ import Home from './components/home/Home';
 import About from './components/about/About';
 import Contact from './components/contacts/Contact';
 import CourseDetail from './components/home/CourseDetail';
+import { ApiProvider } from './context/ApiContext';
 
 // const router = createBrowserRouter([
 //   {
@@ -44,7 +45,9 @@ const router = createBrowserRouter(
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <RouterProvider router = {router} />
+    <ApiProvider>
+      <RouterProvider router = {router} />
+    </ApiProvider>
   </React.StrictMode>
 );
 
