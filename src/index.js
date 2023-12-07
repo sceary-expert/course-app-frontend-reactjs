@@ -11,7 +11,7 @@ import Contact from './components/contacts/Contact';
 import CourseDetail from './components/home/CourseDetail';
 import { ApiProvider } from './context/ApiContext';
 import Login from './components/header/Login';
-
+import Signup from './components/header/Signup';
 // const router = createBrowserRouter([
 //   {
 //     path:'/',
@@ -41,6 +41,7 @@ const router = createBrowserRouter(
       <Route path = 'contact' element= {<Contact/>} />
       <Route path = 'course/:courseId' element= {<CourseDetail/>} />
       <Route path = 'login' element= {<Login/>} />
+      <Route path = 'signup' element= {<Signup/>} />
     </Route>
   )
 )
