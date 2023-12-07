@@ -10,6 +10,7 @@ import About from './components/about/About';
 import Contact from './components/contacts/Contact';
 import CourseDetail from './components/home/CourseDetail';
 import { ApiProvider } from './context/ApiContext';
+import Login from './components/header/Login';
 
 // const router = createBrowserRouter([
 //   {
@@ -39,6 +40,7 @@ const router = createBrowserRouter(
       <Route path = 'about' element= {<About/>} />
       <Route path = 'contact' element= {<Contact/>} />
       <Route path = 'course/:courseId' element= {<CourseDetail/>} />
+      <Route path = 'login' element= {<Login/>} />
     </Route>
   )
 )
