@@ -1,5 +1,4 @@
-import axios from "axios";
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { useParams } from "react-router-dom"
 import { useApi } from "../../context/ApiContext";
 
@@ -10,7 +9,7 @@ const CourseDetail = () =>{
     const {courses, loading} = useApi();
     console.log("loading ", loading);
     // const [course, setCourse] = useState({id:"-1"});
-    const courseArr = courses?.filter((p) => p.id == courseId.courseId) || [];
+    const courseArr = courses?.filter((p) => toString(p.id) === toString(courseId.courseId)) || [];
     let course = [];
     console.log("course array ", courseArr);
     console.log("courses ", courses);

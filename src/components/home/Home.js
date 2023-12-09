@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import AllCourseCard from "./AllCourseCard";
 import { useApi } from "../../context/ApiContext";
+import ErrorPage from "../Error/ErrorPage";
 
 
 
@@ -54,6 +55,7 @@ export default function Home() {
     //     });
     // },[])
     return (
+        
         <div className="mx-auto w-full max-w-7xl m-2 rounded-md">
             <div className="bg-violet-700 h-50 p-8 rounded-lg mb-4 md:mb-8">
                 <div className="container mx-auto py-8 rounded-lg">

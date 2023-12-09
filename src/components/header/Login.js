@@ -1,5 +1,5 @@
 import React from 'react'
-import { ArrowRight } from 'lucide-react'
+import { ArrowRight, Link } from 'lucide-react'
 
 const Login = () => {
     return (
@@ -26,13 +26,13 @@ const Login = () => {
                     </h2>
                     <p className="mt-2 text-center text-sm text-gray-600 ">
                         Don&apos;t have an account?{' '}
-                        <a
-                        href="#"
-                        title=""
+                        <Link
+                        to={"/signup"}
+                        
                         className="font-semibold text-black transition-all duration-200 hover:underline"
                         >
                         Create a free account
-                        </a>
+                        </Link>
                     </p>
                     <form action="#" method="POST" className="mt-8">
                         <div className="space-y-5">
@@ -55,10 +55,10 @@ const Login = () => {
                                 {' '}
                                 Password{' '}
                             </label>
-                            <a href="#" title="" className="text-sm font-semibold text-black hover:underline">
+                            <Link   className="text-sm font-semibold text-black hover:underline">
                                 {' '}
                                 Forgot password?{' '}
-                            </a>
+                            </Link>
                             </div>
                             <div className="mt-2">
                             <input
