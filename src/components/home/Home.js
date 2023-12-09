@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 
-import axios from "axios";
+
 import AllCourseCard from "./AllCourseCard";
 import { useApi } from "../../context/ApiContext";
-import ErrorPage from "../Error/ErrorPage";
+
 
 
 
